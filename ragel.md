@@ -32,8 +32,13 @@ A multi-line FSM spec starts with %%{ and ends with }%%. A single-line FSM spec 
 	
 #### Machine Deﬁnition
 
-	<name> = <expression>;#### Machine Instantiation
-	<name> := <expression>;## Ragel Block Lexical Analysis
+	<name> = <expression>;
+
+#### Machine Instantiation
+
+	<name> := <expression>;
+
+## Ragel Block Lexical Analysis
 
 #### Basic Machines
 
