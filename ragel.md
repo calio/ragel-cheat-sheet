@@ -323,7 +323,7 @@ Code Output Style Options       | Meaning			    | Languages
 *  State minimization is on by default. It can be turned oﬀ with the -n option. The algorithm implemented is similar to Hopcroft’s state minimization algorithm.
 * Visualization
 
-        ragel -V a.rl -o a.dot
+        ragel -Vp a.rl -o a.dot
         dot a.dot -Tpng -o a.png
 
 * ragel 6.8 document <http://www.complang.org/ragel/ragel-guide-6.8.pdf>
