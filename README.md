@@ -346,4 +346,4 @@ _Or using rule name:_
 ## Misc
 * Ragel vim grammar highlight: <https://github.com/jneen/ragel.vim>
 * State minimization is on by default. It can be turned off with the -n option. The algorithm implemented is similar to Hopcroft’s state minimization algorithm.
-* Ragel 6.8 document <http://www.complang.org/ragel/ragel-guide-6.8.pdf>
+* Ragel 6.8 document <http://www.colm.net/files/ragel/ragel-guide-6.8.pdf>
