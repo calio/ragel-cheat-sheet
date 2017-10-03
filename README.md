@@ -266,11 +266,11 @@ Precedence      | Operator                      | Comments
 4               | :                             | Label
 5               | ->                            | Epsilon Transition
 6               | > @ $ %                       | Transitions Actions and Priorities
-                | >/ $/ %/ </ @/ <>/            | EOF Actions
-                | >! $! %! <! @! <>!            | Global Error Actions
-                | >^ $^ %^ <^ @^ <>^            | Local Error Actions
-                | >~ $~ %~ <~ @~ <>~            | To-State Actions
-                | >* $* %* <* @* <>*            | From-State Action
+"               | >/ $/ %/ &lt;/ @/ &lt;>/      | EOF Actions
+"               | >! $! %! &lt;! @! &lt;>!      | Global Error Actions
+"               | >^ $^ %^ &lt;^ @^ &lt;>^      | Local Error Actions
+"               | >~ $~ %~ &lt;~ @~ &lt;>~      | To-State Actions
+"               | >* $* %* &lt;* @* &lt;>*      | From-State Action
 7               | * ** ? + {n} {,n} {n,} {n,m}  | Repetition
 8               | ! ^                           | Negation and Character-Level Negation
 9               | ( <expr> )                    | Grouping
