@@ -16,9 +16,9 @@ A multi-line FSM spec starts with %%{ and ends with }%%. A single-line FSM spec 
 			( ’foo’ | ’bar’ )
 			0 @{ res = 1; };
 	}%%
-	
+
 	%% write data;
-	
+
 	int main( int argc, char **argv )
 	{
 		int cs, res = 0;
@@ -31,7 +31,7 @@ A multi-line FSM spec starts with %%{ and ends with }%%. A single-line FSM spec 
 		printf("result = %i\n", res );
 		return 0;
 	}
-	
+
 #### Machine Definition
 
 	<name> = <expression>;
@@ -85,7 +85,7 @@ The union operation produces a machine that matches any string in machine one or
 `expr & expr`
 
 Intersection produces a machine that matches any string that is in both machine one and machine two
-	
+
 ###### Difference
 
 `expr - expr`
@@ -93,7 +93,7 @@ Intersection produces a machine that matches any string that is in both machine 
 The difference operation produces a machine that matches strings that are in machine one but are not in machine two
 
 For example: `(any - space)*`
-	
+
 ###### Strong Difference
 
 `expr -- expr`
@@ -144,7 +144,7 @@ Character-Level Negation is equivalent to (any - expr)
 1.		main := ( lower* >{ printf("action lower"); }) . ' ';
 2.		action A { printf("action lower"); }
 		main := ( lower* >A) . ' ';
-		
+
 #### Transition actions
 
 * `expr > action`	Entering Action
@@ -233,6 +233,50 @@ fcall *<expr>;  | Push the current state and jump to the entry point given by <e
 fret;           | Return to the target state of the transition on which the last fcall was made.
 fbreak;         | fbreak; – Advance p, save the target state to cs and immediately break out of the execute loop. After an fbreak statement the p variable will point to the next character in the input. The current state will be the target of the current transition. Note that fbreak causes the target state’s to-state actions to be skipped.
 
+#### Required state variables
+
+The following piece of Rust code is an example for viable approach to
+implementing a Ragel machine. This section provides an explanation for
+variables used in this code.
+
+```Rust
+%%{
+    machine sync;
+    write data;
+}%%
+
+fn sync(data: &[u8]) {
+    let mut cs: i32 = 0;  // Current state
+    let mut p = 0usize;  // Current position
+    let mut pe = data.len();  // End position
+    let eof = 23;
+
+    %%{
+        action x {
+            println!("x");
+        }
+
+        action z {
+            println!("z")
+        }
+
+        action y {
+            println!("y")
+        }
+
+        main := 0x56 @z @!x (lower @y @!x)+ '\n';
+
+        write init;
+        write exec;
+    }%%
+}
+```
+
+Variable name | Rust type | C/C+ type | Entailed by | Explanation
+---           | ---       | ---       | ---         | ---
+`cs`          | `i32`     | `int`     | -           | Current state.
+`p`           | `usize`   | `char *`  | -           | Current position.
+`pe`          | `usize`   | `char *`  | -           | End position.
 
 ## Controlling Nondeterminism
 
